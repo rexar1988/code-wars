@@ -14,8 +14,22 @@ anagrams('racer', ['crazer', 'carer', 'racar', 'caers', 'racer']) => ['carer', '
 anagrams('laser', ['lazing', 'lazy',  'lacer']) => []
 */
 
-function anagrams(word, words) {
-  console.log(word.sort());
+function anagrams(word = '', words = []) {
+  const wordArr = word.split('').sort();
+  const toArrayFn = (word) => word.split('').sort();
+  const result = [];
+
+  for (let i = 0; i < words.length; i++) {
+    const itemArr = toArrayFn(words[i]);
+
+    if (itemArr.length !== wordArr.length) {
+      return false;
+    }
+
+
+  }
+
+  console.log(wordArr);
 }
 
 anagrams('abba', ['aabb', 'abcd', 'bbaa', 'dada']);
