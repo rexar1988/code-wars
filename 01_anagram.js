@@ -15,23 +15,50 @@ anagrams('laser', ['lazing', 'lazy',  'lacer']) => []
 */
 
 function anagrams(word = '', words = []) {
-  const wordArr = word.split('').sort();
-  const toArrayFn = (word) => word.split('').sort();
-  const result = [];
+  if (typeof word !== 'string' || !Array.isArray(words)) {
+    return [];
+  }
 
-  for (let i = 0; i < words.length; i++) {
-    const itemArr = toArrayFn(words[i]);
+  const checkWords = (word1, word2) => {
+    const word1Arr = word1.split('').sort();
+    const word2Arr = word2.split('').sort();
 
-    if (itemArr.length !== wordArr.length) {
+    if (word1Arr.length !== word2Arr.length) {
       return false;
     }
 
+    for (let i = 0; i < word1Arr.length; i++) {
+      if (word1Arr[i] !== word2Arr[i]) {
+        return false;
+      }
+    }
 
+    return true;
+  };
+
+  const result = new Set();
+
+  for (let i = 0; i < words.length; i++) {
+    if (checkWords(word, words[i])) {
+      result.add(words[i]);
+    }
   }
 
-  console.log(wordArr);
+  return Array.from(result);
 }
 
-anagrams('abba', ['aabb', 'abcd', 'bbaa', 'dada']);
-// anagrams('racer', ['crazer', 'carer', 'racar', 'caers', 'racer']);
-// anagrams('laser', ['lazing', 'lazy',  'lacer']);
+console.log(anagrams('abba', ['aabb', 'abcd', 'bbaa', 'dada']));
+console.log(anagrams('racer', ['crazer', 'carer', 'racar', 'caers', 'racer']));
+console.log(anagrams('laser', ['lazing', 'lazy', 'lacer']));
+
+// del
+function tt() {
+  return class test {
+    constructor() {
+      console.log('123');
+    }
+  }
+}
+
+const t1 = tt();
+new t1;
